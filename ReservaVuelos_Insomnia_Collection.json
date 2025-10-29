@@ -1,0 +1,341 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-10-27T22:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_01",
+      "parentId": "fld_auth",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/test",
+      "name": "🧪 Test Sistema",
+      "description": "Verificar que el sistema esté funcionando",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1698435600000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_02",
+      "parentId": "fld_auth",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/auth/registro",
+      "name": "📝 Registro Usuario",
+      "description": "Registrar nuevo usuario",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombres\": \"Juan Carlos\",\n  \"apellidos\": \"Pérez García\",\n  \"email\": \"juan.perez@email.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\",\n  \"telefono\": \"+52 555 123 4567\",\n  \"fecha_nacimiento\": \"1990-05-15\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1698435599000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_03",
+      "parentId": "fld_auth",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/auth/login",
+      "name": "🔐 Login",
+      "description": "Iniciar sesión",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@reservavuelos.com\",\n  \"password\": \"password123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1698435598000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_04",
+      "parentId": "fld_protected",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/auth/perfil",
+      "name": "👤 Ver Perfil",
+      "description": "Ver perfil del usuario autenticado",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1698435597000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_05",
+      "parentId": "fld_vuelos",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/vuelos",
+      "name": "✈️ Listar Vuelos",
+      "description": "Obtener todos los vuelos disponibles",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1698435596000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_06",
+      "parentId": "fld_vuelos",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/vuelos/buscar",
+      "name": "🔍 Buscar Vuelos",
+      "description": "Buscar vuelos por criterios",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "origen_codigo",
+          "value": "CUE",
+          "description": "Código IATA del aeropuerto origen (CUE, GYE, UIO, MEX, MAD)"
+        },
+        {
+          "name": "destino_codigo",
+          "value": "UIO",
+          "description": "Código IATA del aeropuerto destino (CUE, GYE, UIO, MEX, MAD)"
+        },
+        {
+          "name": "fecha_salida",
+          "value": "2025-10-29",
+          "description": "Fecha del vuelo (YYYY-MM-DD)"
+        },
+        {
+          "name": "pasajeros",
+          "value": "1",
+          "description": "Número de pasajeros (1-9)"
+        },
+        {
+          "name": "clase_preferida",
+          "value": "economica",
+          "description": "Clase preferida: economica, premium, ejecutiva"
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1698435595000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_07",
+      "parentId": "fld_protected",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/reservas",
+      "name": "🎫 Crear Reserva",
+      "description": "Crear una nueva reserva",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"vuelo_ids\": [\"690006b69c367400be0f3e17\"],\n  \"tipo_viaje\": \"ida\",\n  \"pasajeros\": [\n    {\n      \"nombres\": \"Ana María\",\n      \"apellidos\": \"García López\",\n      \"tipo_documento\": \"cedula\",\n      \"numero_documento\": \"1234567890\",\n      \"fecha_nacimiento\": \"1985-03-20\",\n      \"nacionalidad\": \"Ecuador\",\n      \"email\": \"ana.garcia@email.com\",\n      \"telefono\": \"+593987654321\"\n    }\n  ],\n  \"preferencias\": {\n    \"clase\": \"economica\",\n    \"asiento_ventana\": true\n  },\n  \"observaciones\": \"Reserva de prueba desde Insomnia\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1698435594000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_08",
+      "parentId": "fld_protected",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/reservas",
+      "name": "📋 Mis Reservas",
+      "description": "Ver todas mis reservas",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1698435593000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_09",
+      "parentId": "fld_admin",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/admin/aviones",
+      "name": "🛩️ Listar Aviones (Admin)",
+      "description": "Listar todos los aviones",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1698435592000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_10",
+      "parentId": "fld_admin",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "url": "http://127.0.0.1:8000/api/admin/aviones",
+      "name": "➕ Crear Avión (Admin)",
+      "description": "Crear un nuevo avión",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"codigo_avion\": \"TEST001\",\n  \"aerolinea_id\": \"690006a99c367400be0f3dc3\",\n  \"modelo\": \"Boeing 737-800\",\n  \"num_asientos_total\": 189,\n  \"configuracion_asientos\": {\n    \"economica\": {\n      \"total\": 162,\n      \"filas\": \"21-45\",\n      \"asientos_por_fila\": 6\n    },\n    \"ejecutiva\": {\n      \"total\": 27,\n      \"filas\": \"1-9\",\n      \"asientos_por_fila\": 3\n    }\n  },\n  \"activo\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1698435591000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_auth",
+      "parentId": "wrk_01",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "name": "🔐 Autenticación",
+      "description": "Endpoints de autenticación y registro",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1698435600000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_vuelos",
+      "parentId": "wrk_01",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "name": "✈️ Vuelos Públicos",
+      "description": "Endpoints públicos de vuelos",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1698435599000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_protected",
+      "parentId": "wrk_01",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "name": "🔒 Rutas Protegidas",
+      "description": "Endpoints que requieren autenticación",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1698435598000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_admin",
+      "parentId": "wrk_01",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "name": "👨‍💼 Admin",
+      "description": "Endpoints administrativos",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1698435597000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_01",
+      "parentId": null,
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "name": "ReservaVuelos API",
+      "description": "API completa para sistema de reserva de vuelos",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_01",
+      "parentId": "wrk_01",
+      "modified": 1698435600000,
+      "created": 1698435600000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://127.0.0.1:8000/api",
+        "auth_token": "Bearer YOUR_TOKEN_HERE"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url", "auth_token"]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1698435600000,
+      "_type": "environment"
+    }
+  ]
+}
