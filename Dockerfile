@@ -5,7 +5,9 @@
 FROM composer:2 AS vendor
 WORKDIR /app
 COPY composer.json composer.lock /app/
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
+# Ejecutar composer ignorando la extensión ext-mongodb en la etapa build
+# (la extensión se instalará en la etapa runtime vía PECL)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts --ignore-platform-req=ext-mongodb
 
 ### Stage 2: Runtime con frankenphp
 FROM dunglas/frankenphp:php8.2.29-bookworm
