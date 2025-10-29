@@ -1,10 +1,31 @@
 {
-    # Disable automatic HTTPS redirects so the platform's load balancer can handle TLS
+    skip_install_trust
+
+    # Disable automatic HTTPS so the platform LB handles TLS
     auto_https off
+
+    {$CADDY_GLOBAL_OPTIONS}
+
+    frankenphp {
+        {$FRANKENPHP_CONFIG}
+    }
 }
 
-# Listen on the port provided by the platform (Railway sets $PORT)
-:{$PORT}
-root * /srv/app/public
-php_fastcgi unix//run/frankenphp.sock
-file_server
+{$CADDY_EXTRA_CONFIG}
+
+# Listen on the platform-provided port (default 80 locally)
+:{$PORT:80} {
+    root {$SERVER_ROOT:public/}
+    encode zstd br gzip
+
+    # Serve static files and fallback to Laravel's index.php via frankenphp's php_server
+    try_files {path} /index.php?{query}
+
+    php_server {
+        # frankenphp handles PHP internally; no external socket required
+    }
+
+    {$CADDY_SERVER_EXTRA_DIRECTIVES}
+}
+
+import Caddyfile.d/*.caddyfile

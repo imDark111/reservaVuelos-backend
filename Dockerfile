@@ -40,8 +40,10 @@ COPY --from=vendor /app/composer.json /srv/app/composer.json
 # Copiar el resto de la aplicación
 COPY . /srv/app
 
-# Copiar Caddyfile personalizado para forzar uso de $PORT y desactivar auto HTTPS
-COPY Caddyfile /etc/frankenphp/Caddyfile
+# Note: do not overwrite the base image's default Caddyfile to preserve frankenphp wiring.
+# If you need to customize, prefer setting environment variables (CADDY_GLOBAL_OPTIONS, SERVER_NAME)
+# or adding files in Caddyfile.d. We intentionally do not copy a Caddyfile here so the image's default
+# frankenphp configuration (which properly wires PHP handling) remains intact.
 
 # Ajustes de permisos (opcional, evita problemas de escritura)
 RUN chown -R www-data:www-data /srv/app || true
