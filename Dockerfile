@@ -1,9 +1,16 @@
 # Dockerfile para backend-reservaVuelos
 # Basado en dunglas/frankenphp (usado por Railpack) y con ext-mongodb instalada via PECL
 
+### Stage 1: Composer (instala dependencias usando la imagen oficial de composer)
+FROM composer:2 AS vendor
+WORKDIR /app
+COPY composer.json composer.lock /app/
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
+
+### Stage 2: Runtime con frankenphp
 FROM dunglas/frankenphp:php8.2.29-bookworm
 
-# Instalar dependencias necesarias para pecl y compilación
+# Instalar dependencias necesarias para compilar extensiones
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         autoconf \
@@ -23,11 +30,10 @@ RUN pecl install mongodb \
 # Directorio de trabajo
 WORKDIR /srv/app
 
-# Copiar composer files primero para aprovechar cache de docker
-COPY composer.json composer.lock /srv/app/
-
-# Instalar dependencias con Composer (sin dev, optimizado)
-RUN php -v && composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+# Copiar vendor desde la etapa de composer
+COPY --from=vendor /app/vendor /srv/app/vendor
+COPY --from=vendor /app/composer.lock /srv/app/composer.lock
+COPY --from=vendor /app/composer.json /srv/app/composer.json
 
 # Copiar el resto de la aplicación
 COPY . /srv/app
