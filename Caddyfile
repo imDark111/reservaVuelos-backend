@@ -1,0 +1,10 @@
+{
+    # Disable automatic HTTPS redirects so the platform's load balancer can handle TLS
+    auto_https off
+}
+
+# Listen on the port provided by the platform (Railway sets $PORT)
+:{$PORT}
+root * /srv/app/public
+php_fastcgi unix//run/frankenphp.sock
+file_server
